@@ -1,0 +1,91 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, inital-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/js/trial.css">
+
+  </head>
+  <body class="chat">
+
+    <div class="chat__sidebar">
+      <h3>PLAYERS</h3>
+      <div id="users"></div>
+    </div>
+
+    <div class="chat__main">
+      <ol id="messages" class="chat__messages"></ol>
+
+      <div class="chat__footer">
+        <form id="message-form">
+          <input name="message" type="text" placeholder="Message" autofocus autocomplete="off"/>
+          <button id="send-btn">Send</button>
+        </form>
+        <button id="Start-Game">Start Game</button>
+      </div>
+    </div>
+
+    <script id="message-template" type="text/template">
+      <li class="message">
+        <div class="message__title">
+          <h4>{{from}}</h4>
+          <span>{{createdAt}}</span>
+        </div>
+        <div class="message__body">
+          <p>{{text}}</p>
+        </div>
+      </li>
+    </script>
+
+    <!-- <form> -->
+      <div class="popup">  
+          <div class="close-btn">&times;</div>
+          <div class="form">
+              <h3>MAKE YOUR GUESS</h3>
+              <div class="form-element">
+                  <label for="question">Question</label>
+                  <input type="text" name="question" id="question" placeholder="Enter your Question" required>              
+              </div>
+              <div class="form-element">
+                  <label for="answer" >Answer</label>
+                  <input type="text" name="answer" id="answer" placeholder="Enter the answer" required>  
+                  <!-- <textarea  id="answer" placeholder="Enter your answer"></textarea> -->
+              </div>
+              <div class="form-element">
+                  <button id="submit-btn">Submit</button>
+              </div>
+          </div>              
+      </div>
+  <!-- </form> -->
+
+  <div class="Anspopup">  
+    <div class="Aclose-btn">&times;</div>
+    <div class="form">
+        <h2>Welcome</h2>
+        <div class="form-element">
+            <label for="question">Question</label>            
+        </div>
+        <div class="form-element">
+            <label for="answer" >Your Answer</label>
+            <input type="text"  name="answerCheck" placeholder="Enter password">  
+        </div>
+        <div class="form-element">
+            <button id="answerCheck">ENTER YOUR ANSWER<div id="timer">00:00</div></button>
+        </div>
+    </div>
+        
+</div>
+
+  
+    <script type="text/javascript" src="/js/trial.js"></script>
+    <script src = '/socket.io/socket.io.js'></script>
+    <script type="text/javascript" src="/js/chat.js"></script>
+    <script type="text/javascript" src="/js/libs/moment.js"></script>
+    <script type="text/javascript" src="/js/libs/mustache.js"></script>
+  </body>
+</html>

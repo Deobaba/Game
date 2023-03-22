@@ -1,0 +1,67 @@
+/*
+ * https://developers.google.com/youtube/player_parameters?hl=de
+ */ 
+loading = false
+function loadYouTube()
+{
+	if (loading) return;
+	loading = true;
+	/*
+	 * Load the IFrame Player API code asynchronously.
+	 */
+	var tag = document.createElement("script");
+	tag.src = "https://www.youtube.com/player_api";
+	tag.async = true;
+	$("body").append(tag);
+}
+var videos = $(".youtube-video");
+if (videos.length > 0)
+{
+	/*
+	 * ????-??-?? 5 seconds to avoid early ad_status.js TODO what did I mean?
+	 * 2020-06-08 delay still proved good, because otherwise PageSpeed Insight says this is unused JavaScript
+	 */	
+	setTimeout(loadYouTube, 5000);
+}
+function onYouTubePlayerAPIReady()
+{
+	videoReadyCount = 0;
+	/*
+	 * player_api was loaded.
+	 * Now replace each div.youtube.video with a player (in an <iframe>).
+	 */
+	videos.each(createPlayer);
+}
+function createPlayer()
+{
+	var videoId = this.id;
+  	new YT.Player(videoId,
+  	{
+  		playerVars: { modestbranding: 1 },
+  		events: { "onReady": onYouTubeVideoAvailable },
+  		videoId: videoId
+  	});
+}
+function onYouTubeVideoAvailable()
+{
+	videoReadyCount ++;
+	if (videoReadyCount == videos.length)
+	{
+		/*
+		 *	give the browser some extra time (100 ms)
+		 *	before really showing the players
+		 *	to avoid having a second with a black screen
+		 */
+		setTimeout(showYouTubePlayers, 100);
+	}
+}
+function showYouTubePlayers()
+{
+	videos.each(showYouTubePlayer);
+}
+function showYouTubePlayer()
+{
+	var videoId = "#" + this.id;
+	$(videoId).show();
+	$(videoId+"-picture").hide();	
+}

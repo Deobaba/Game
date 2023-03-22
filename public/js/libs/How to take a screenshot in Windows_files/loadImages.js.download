@@ -1,0 +1,18 @@
+var imgDefer = document.getElementsByTagName('img');
+for (var i=0; i<imgDefer.length; i++) 
+{
+	var data = imgDefer[i].getAttribute('data-src')
+	if (data) 
+	{
+		imgDefer[i].setAttribute('src', data);
+	} 
+} 
+var divDefer = document.getElementsByTagName('div');
+for (var i=0; i<divDefer.length; i++) 
+{
+	var data = divDefer[i].getAttribute('data-style')
+	if (data) 
+	{
+		divDefer[i].setAttribute('style', data);
+	} 
+} 
